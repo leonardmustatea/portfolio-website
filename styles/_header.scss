@@ -1,0 +1,36 @@
+.header-container {
+    background-color: $background-color;
+    position: absolute;
+    top: 0;
+    height: 3.75rem;
+    width: 100%;
+    font-size: 1.5em;
+    color: $text-color;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+            height: 1.8rem;
+            width: 3rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    .say_hi {
+        color: $text-color;
+        margin-right: 20px;
+        font-size: 1.2rem;
+    }
+}

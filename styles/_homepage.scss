@@ -1,0 +1,110 @@
+@import './variables';
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Tangerine:wght@400;700&family=Tauri&display=swap');
+
+.header {
+    color: $text-color;
+}
+
+.homepage_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    .new-logo {
+        // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        font-size: 2em;
+        color: white;
+        height: 4em;
+        width: 8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:nth-child(1) {
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        .first {
+            font-family: 'Tangerine', cursive;
+            font-size: 8rem;
+            animation: glitch 1s linear infinite;
+
+            &::before,
+            &::after {
+                content: attr(data-text);
+                position: absolute;
+                left: 0;
+            }
+
+            &::before {
+                animation: glitchTop 1s linear infinite;
+                clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+                -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            }
+
+            &::after {
+                animation: glitchBottom 1.5s linear infinite;
+                clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+                -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            }
+        }
+        .second {
+            font-family: 'Tauri', sans-serif;
+            font-size: 5rem;
+            text-decoration: underline;
+            font-weight: 400;
+        }
+    }
+
+    .click_me {
+        padding-top: 1em;
+        color: $text-color;
+    }
+}
+
+@keyframes glitch {
+    2%,
+    64% {
+        transform: translate(2px, -2px);
+    }
+    4%,
+    60% {
+        transform: translate(-2px, 0) skew(0deg);
+    }
+    62% {
+        transform: translate(0, 0) skew(5deg);
+    }
+}
+
+@keyframes glitchTop {
+    2%,
+    64% {
+        transform: translate(2px, -2px);
+    }
+    4%,
+    60% {
+        transform: translate(-2px, 2px);
+    }
+    62% {
+        transform: translate(13px, -1px) skew(-13deg);
+    }
+}
+
+@keyframes glitchBottom {
+    2%,
+    64% {
+        transform: translate(-2px, 0);
+    }
+    4%,
+    60% {
+        transform: translate(-2px, 0);
+    }
+    62% {
+        transform: translate(-22px, 5px) skew(21deg);
+    }
+}
