@@ -1,0 +1,205 @@
+// Border Hover Animation Button
+$light-gray: #dae9f4; // rgb(218,233,244)
+$dark-gray: #9baec8; // rgb(155,174,200)
+$blue: #0395e5; // rgb(3,149,229)
+
+$btn-font-size: 1.5em;
+$btn-letter-spacing: 3px;
+$btn-border-width: 300px;
+$btn-border-height: 60px;
+$btn-border-stroke: 1px;
+$btn-border-transition: 0.15s;
+$btn-border-pipeline_width: $btn-border-width + $btn-border-stroke;
+$btn-border-pipeline_height: $btn-border-height + $btn-border-stroke;
+$btn-border-pipes: 4;
+
+@function border-pipeline($btn-border-transition, $pipe) {
+    @return $btn-border-transition * $pipe;
+}
+
+@mixin border-animation($dimension, $easing, $pipe) {
+    transition: $btn-border-transition $dimension $easing border-pipeline($btn-border-transition, $pipe);
+    -web-kit-transition: $btn-border-transition $dimension $easing border-pipeline($btn-border-transition, $pipe);
+}
+
+.logo_container {
+    background-color: $background-color;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+
+    .logo {
+        position: absolute;
+        width: $btn-border-width;
+        height: $btn-border-height;
+        background: none;
+        text-align: center;
+        transition: ($btn-border-transition * $btn-border-pipes) + $btn-border-transition ease;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: shrinkBorderWidth 1s linear forwards 3s, shrinkBorderHeight 1s linear forwards 3s;
+        // move 2s linear forwards 6s;
+        .logo-border {
+            height: $btn-border-height;
+
+            &::before {
+                position: absolute;
+                width: $btn-border-stroke;
+                height: 0;
+                content: '';
+                background: $blue;
+                bottom: -$btn-border-stroke * 2;
+                left: -$btn-border-stroke * 2;
+                animation: animateBorderBefore 0.5s linear forwards 0s, shrinkBorderHeight 0.5s linear forwards 3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            &::after {
+                position: absolute;
+                width: 0;
+                height: $btn-border-stroke;
+                content: '';
+                background: $blue;
+                bottom: -$btn-border-stroke * 2;
+                right: -$btn-border-stroke * 2;
+                animation: animateBorderAfter 1s linear forwards 2s, shrinkBorderWidth 1s linear forwards 3s;
+            }
+        }
+
+        &::before {
+            position: absolute;
+            width: 0;
+            height: $btn-border-stroke;
+            content: '';
+            background: $blue;
+            top: -$btn-border-stroke;
+            left: -$btn-border-stroke * 2;
+            animation: animateBefore 1s linear forwards 0.5s, shrinkBorderWidth 1s linear forwards 3s;
+        }
+
+        &::after {
+            position: absolute;
+            width: $btn-border-stroke;
+            height: 0;
+            content: '';
+            background: $blue;
+            top: -$btn-border-stroke;
+            right: -$btn-border-stroke * 2;
+            animation: animateAfter 0.5s linear forwards 1.5s, shrinkBorderHeight 0.5s linear forwards 3s;
+        }
+
+        p {
+            color: $dark-gray;
+            font-family: $font-family;
+            letter-spacing: $btn-letter-spacing;
+            font-size: $btn-font-size;
+            line-height: $btn-border-height;
+
+            &::before {
+                content: 'Leonard';
+                animation: changeTextBefore 1s linear forwards 2.5s;
+            }
+
+            &::after {
+                content: ' Mustatea';
+                animation: changeTextAfter 1s linear forwards 2.5s;
+            }
+        }
+    }
+}
+
+@keyframes animateBefore {
+    to {
+        width: $btn-border-pipeline_width;
+        transition: $btn-border-transition width ease $btn-border-transition * 0;
+    }
+}
+
+@keyframes animateAfter {
+    to {
+        height: $btn-border-pipeline_height;
+        transition: $btn-border-transition height ease $btn-border-transition * 1;
+    }
+}
+
+@keyframes animateBorderBefore {
+    to {
+        height: $btn-border-pipeline_height;
+        transition: $btn-border-transition height ease $btn-border-transition * 3;
+    }
+}
+
+@keyframes animateBorderAfter {
+    to {
+        width: $btn-border-pipeline_width;
+        transition: $btn-border-transition width ease $btn-border-transition * 2;
+    }
+}
+
+@keyframes shrinkBorderHeight {
+    to {
+        height: 40px;
+    }
+}
+
+@keyframes shrinkBorderWidth {
+    to {
+        width: 60px;
+    }
+}
+
+@keyframes animateBorderPTag {
+    to {
+        color: $blue;
+    }
+}
+
+@keyframes changeTextBefore {
+    0% {
+        content: 'Leonard';
+    }
+    50% {
+        color: #2d2254;
+    }
+    100% {
+        content: 'L';
+        color: $dark-gray;
+        letter-spacing: -2px;
+    }
+}
+
+@keyframes changeTextAfter {
+    0% {
+        content: ' Mustatea';
+    }
+    50% {
+        color: #2d2254;
+    }
+    100% {
+        content: 'M';
+        color: $dark-gray;
+        letter-spacing: -2px;
+        transform: scale(-1, 1);
+    }
+}
+
+@keyframes move {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        top: 20px;
+        left: 20px;
+        transform: translate(0, 0);
+    }
+}

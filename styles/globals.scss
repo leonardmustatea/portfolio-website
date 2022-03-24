@@ -1,0 +1,32 @@
+@import './homepage';
+@import './about';
+@import './header';
+@import './logo';
+@import './powerButton';
+@import './socialIcons';
+@import './variables';
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: $font-family;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.content {
+    background: $background-color;
+    height: 100vh;
+    width: 100vw;
+    // background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
