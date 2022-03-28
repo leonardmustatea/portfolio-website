@@ -3,13 +3,19 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Logo from '../components/Logo';
 import { useCookies } from 'react-cookie';
-import PowerButton from '../components/PowerButton';
 import SocialIcons from '../components/SocialIcons';
+import Blog from '../components/Blog';
+import Work from '../components/Work';
+import About from '../components/About';
+import MySkills from '../components/MySkills';
+import Intro from '../components/Intro';
 
 const title = `Leonard's Portfolio website`;
 const Home: NextPage = () => {
-    const [timedPopup, setTimedPopup] = useState(true);
+    const [timedPopup, setTimedPopup] = useState<boolean>(true);
+    const [showProfile, setShowProfile] = useState<boolean>(false);
     const [showLogo, setShowLogo] = useState<boolean>(true);
+    const [theme, setTheme] = useState<string>('');
     const [cookies, setCookie] = useCookies(['seen']);
 
     useEffect(() => {
@@ -28,6 +34,11 @@ const Home: NextPage = () => {
         }, 4500);
     }, []);
 
+    const click = () => {
+        setShowProfile(!showProfile);
+        setTheme(theme === 'dark' ? '' : 'dark');
+    };
+
     return (
         <>
             <Head>
@@ -44,16 +55,25 @@ const Home: NextPage = () => {
 
             <>
                 {showLogo && <Logo trigger={timedPopup} />}
-                <PowerButton />
                 <div className="homepage_container">
-                    <div className="new-logo">
-                        <span data-text="<L>|" className="first">
-                            {'<L>|'}
-                        </span>
-                        <span className="second">M</span>
+                    <div className={`light_profile_side${showProfile ? ' light_profile_side_show' : ''}`}></div>
+                    <button className={`center${showProfile ? ' profile' : ''}`} onClick={click}>
+                        <div className="new_logo">
+                            <span data-text="<L>|" className="first">
+                                {'<L>|'}
+                            </span>
+                            <span className="second">M</span>
+                        </div>
+                        <span className="click_me">click me</span>
+                    </button>
+                    <SocialIcons theme={theme} />
+                    <Blog />
+                    <Work theme={theme} />
+                    <div className="bottom_bar">
+                        <About theme={theme} />
+                        <MySkills />
                     </div>
-                    <span className="click_me">click me</span>
-                    <SocialIcons />
+                    {showProfile && <Intro />}
                 </div>
             </>
         </>
