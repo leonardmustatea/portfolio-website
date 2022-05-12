@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { CookiesProvider } from 'react-cookie';
 import Layout from '../components/Layout';
 import '../styles/globals.scss';
+import { AnimatePresence } from 'framer-motion';
 
 /**
  * This is the app
@@ -10,11 +11,13 @@ import '../styles/globals.scss';
  */
 function App({ Component, pageProps }: AppProps): JSX.Element {
     return (
-        <CookiesProvider>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
-        </CookiesProvider>
+        <AnimatePresence exitBeforeEnter>
+            <CookiesProvider>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </CookiesProvider>
+        </AnimatePresence>
     );
 }
 
