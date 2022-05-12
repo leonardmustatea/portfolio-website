@@ -131,6 +131,7 @@
     .work {
         position: absolute;
         color: $text-color;
+        cursor: pointer;
         z-index: 3;
 
         h3 {
@@ -154,10 +155,13 @@
         transform: rotate(-90deg);
         left: calc(1rem + 2vw);
     }
+
     .about,
     .myskills {
         color: $text-color;
+        cursor: pointer;
         z-index: 3;
+
         h3 {
             font-family: '$font-family';
             letter-spacing: 0.2rem;
